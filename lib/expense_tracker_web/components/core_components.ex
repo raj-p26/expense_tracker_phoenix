@@ -156,8 +156,7 @@ defmodule ExpenseTrackerWeb.CoreComponents do
         phx-connected={hide("#client-error")}
         hidden
       >
-        Attempting to reconnect
-        <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
+        Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
 
       <.flash
@@ -220,7 +219,10 @@ defmodule ExpenseTrackerWeb.CoreComponents do
       <.button phx-click="go" class="ml-2">Send!</.button>
   """
   attr :type, :string, default: nil
-  attr :class, :string, default: nil
+
+  attr :class, :string, default: "rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3
+      text-sm font-semibold leading-6 text-white active:text-white/80"
+
   attr :rest, :global, include: ~w(disabled form name value)
 
   slot :inner_block, required: true
@@ -230,8 +232,7 @@ defmodule ExpenseTrackerWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "phx-submit-loading:opacity-75 rounded-lg bg-zinc-900 hover:bg-zinc-700 py-2 px-3",
-        "text-sm font-semibold leading-6 text-white active:text-white/80",
+        "phx-submit-loading:opacity-75",
         @class
       ]}
       {@rest}

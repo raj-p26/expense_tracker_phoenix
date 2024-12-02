@@ -1,0 +1,16 @@
+<div>
+  <.link patch={~p"/incomes/add"}>
+    <.button class="bg-slate-900 hover:bg-slate-800 hover:shadow-lg transition-all text-white rounded-full active:bg-slate-700 p-4 shadow fixed bottom-0 right-0 mr-14 mb-14">
+      <.icon name="hero-plus" />
+    </.button>
+  </.link>
+
+  <.modal :if={@live_action == :add} id="incomes-modal" show on_cancel={JS.patch(~p"/incomes/")}>
+    <.live_component
+      module={FormComponent}
+      user={@current_user}
+      id={@page_id}
+      title={@page_title}
+    />
+  </.modal>
+</div>

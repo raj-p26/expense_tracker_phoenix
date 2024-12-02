@@ -92,4 +92,5 @@ module.exports = {
       );
     }),
   ],
+  darkMode: "selector",
 };
