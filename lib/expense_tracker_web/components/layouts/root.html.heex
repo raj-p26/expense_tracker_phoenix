@@ -55,6 +55,14 @@
             </li>
             <li>
               <.link
+                patch={~p"/categories"}
+                class="block text-white p-2 dark:bg-sky-500 dark:hover:bg-sky-400 bg-slate-950 hover:bg-slate-800 dark:hover:shadow rounded transition"
+              >
+                Categories
+              </.link>
+            </li>
+            <li>
+              <.link
                 href={~p"/users/log_out"}
                 method="delete"
                 class="block text-white p-2 dark:bg-sky-500 dark:hover:bg-sky-400 bg-slate-950 hover:bg-slate-800 dark:hover:shadow rounded transition"

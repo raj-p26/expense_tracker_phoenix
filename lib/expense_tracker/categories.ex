@@ -21,6 +21,13 @@ defmodule ExpenseTracker.Categories do
     Repo.all(Category)
   end
 
+  def list_categories_by_user_id(user_id) do
+    Category
+    |> where([c], c.user_id == ^user_id)
+    |> select([c], %{name: c.name, type: c.transaction_type, id: c.id})
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single category.
 
@@ -36,6 +43,13 @@ defmodule ExpenseTracker.Categories do
 
   """
   def get_category!(id), do: Repo.get!(Category, id)
+
+  def get_category(id) do
+    Category
+    |> where([c], c.id == ^id)
+    |> select([c], %{name: c.name, type: c.transaction_type, id: c.id})
+    |> Repo.one()
+  end
 
   @doc """
   Creates a category.
