@@ -1,6 +1,7 @@
 defmodule ExpenseTrackerWeb.UserRegistrationController do
   use ExpenseTrackerWeb, :controller
 
+  alias ExpenseTracker.Categories
   alias ExpenseTracker.Accounts
   alias ExpenseTracker.Accounts.User
   alias ExpenseTrackerWeb.UserAuth
@@ -13,6 +14,8 @@ defmodule ExpenseTrackerWeb.UserRegistrationController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.register_user(user_params) do
       {:ok, user} ->
+        Categories.add_default_categories(user.id)
+
         {:ok, _} =
           Accounts.deliver_user_confirmation_instructions(
             user,

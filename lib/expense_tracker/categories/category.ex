@@ -17,6 +17,6 @@ defmodule ExpenseTracker.Categories.Category do
     category
     |> cast(attrs, [:name, :user_id, :transaction_type])
     |> validate_required([:name, :user_id, :transaction_type])
-    |> validate_inclusion(:transaction_type, ["incomes", "expenses"])
+    |> validate_inclusion(:transaction_type, ["income", "expense"])
   end
 end

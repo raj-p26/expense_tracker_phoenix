@@ -102,9 +102,23 @@ defmodule ExpenseTracker.Categories do
     Category.changeset(category, attrs)
   end
 
-  def get_category_by_user_id(user_id) do
+  def get_category_by_user_id(user_id, type \\ "income") do
     Category
-    |> where([c], c.user_id == ^user_id)
+    |> where([c], c.user_id == ^user_id and c.transaction_type == ^type)
+    |> select([c], {c.name, c.id})
     |> Repo.all()
+  end
+
+  def add_default_categories(user_id) do
+    create_category(%{name: "Food", user_id: user_id, transaction_type: "expense"})
+    create_category(%{name: "Entertainment", user_id: user_id, transaction_type: "expense"})
+    create_category(%{name: "Rent", user_id: user_id, transaction_type: "expense"})
+    create_category(%{name: "Transportation", user_id: user_id, transaction_type: "expense"})
+    create_category(%{name: "Utilties", user_id: user_id, transaction_type: "expense"})
+
+    create_category(%{name: "Salary", user_id: user_id, transaction_type: "income"})
+    create_category(%{name: "Business", user_id: user_id, transaction_type: "income"})
+    create_category(%{name: "Investment", user_id: user_id, transaction_type: "income"})
+    create_category(%{name: "Freelance", user_id: user_id, transaction_type: "income"})
   end
 end

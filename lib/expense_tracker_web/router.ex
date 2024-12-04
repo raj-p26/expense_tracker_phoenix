@@ -56,7 +56,10 @@ defmodule ExpenseTrackerWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     live "/incomes", IncomesLive.Index, :index
-    live "/incomes/add", IncomesLive.Index, :add
+    live "/incomes/new", IncomesLive.Index, :new
+    live "/incomes/:id/edit", IncomesLive.Index, :edit
+    live "/incomes/:id/show", IncomesLive.Show
+    live "/incomes/:id/show/edit", IncomesLive.Show, :edit
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

@@ -7,7 +7,5 @@ defmodule ExpenseTrackerWeb.Index do
     else
       redirect(conn, to: "/users/log_in")
     end
-
-    conn
   end
 end
