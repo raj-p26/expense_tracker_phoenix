@@ -61,6 +61,12 @@ defmodule ExpenseTrackerWeb.Router do
     live "/incomes/:id/show", IncomesLive.Show
     live "/incomes/:id/show/edit", IncomesLive.Show, :edit
 
+    live "/expenses", ExpensesLive.Index, :index
+    live "/expenses/new", ExpensesLive.Index, :new
+    live "/expenses/:id/edit", ExpensesLive.Index, :edit
+    live "/expenses/:id/show", ExpensesLive.Show
+    live "/expenses/:id/show/edit", ExpensesLive.Show, :edit
+
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email

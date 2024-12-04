@@ -60,4 +60,62 @@ defmodule ExpenseTracker.TransactionsTest do
       assert %Ecto.Changeset{} = Transactions.change_income(income)
     end
   end
+
+  describe "expenses" do
+    alias ExpenseTracker.Transactions.Expense
+
+    import ExpenseTracker.TransactionsFixtures
+
+    @invalid_attrs %{description: nil, amount: nil, add_date: nil}
+
+    test "list_expenses/0 returns all expenses" do
+      expense = expense_fixture()
+      assert Transactions.list_expenses() == [expense]
+    end
+
+    test "get_expense!/1 returns the expense with given id" do
+      expense = expense_fixture()
+      assert Transactions.get_expense!(expense.id) == expense
+    end
+
+    test "create_expense/1 with valid data creates a expense" do
+      valid_attrs = %{description: "some description", amount: 42, add_date: ~D[2024-12-03]}
+
+      assert {:ok, %Expense{} = expense} = Transactions.create_expense(valid_attrs)
+      assert expense.description == "some description"
+      assert expense.amount == 42
+      assert expense.add_date == ~D[2024-12-03]
+    end
+
+    test "create_expense/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Transactions.create_expense(@invalid_attrs)
+    end
+
+    test "update_expense/2 with valid data updates the expense" do
+      expense = expense_fixture()
+      update_attrs = %{description: "some updated description", amount: 43, add_date: ~D[2024-12-04]}
+
+      assert {:ok, %Expense{} = expense} = Transactions.update_expense(expense, update_attrs)
+      assert expense.description == "some updated description"
+      assert expense.amount == 43
+      assert expense.add_date == ~D[2024-12-04]
+    end
+
+    test "update_expense/2 with invalid data returns error changeset" do
+      expense = expense_fixture()
+      assert {:error, %Ecto.Changeset{}} = Transactions.update_expense(expense, @invalid_attrs)
+      assert expense == Transactions.get_expense!(expense.id)
+    end
+
+    test "delete_expense/1 deletes the expense" do
+      expense = expense_fixture()
+      assert {:ok, %Expense{}} = Transactions.delete_expense(expense)
+      assert_raise Ecto.NoResultsError, fn -> Transactions.get_expense!(expense.id) end
+    end
+
+    test "change_expense/1 returns a expense changeset" do
+      expense = expense_fixture()
+      assert %Ecto.Changeset{} = Transactions.change_expense(expense)
+    end
+  end
 end

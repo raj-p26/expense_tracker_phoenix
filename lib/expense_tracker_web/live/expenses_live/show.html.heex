@@ -1,0 +1,40 @@
+<div>
+  <.header>
+    <%= @page_title %>
+    <:actions>
+      <.link patch={~p"/expenses/#{@expense}/show/edit"}>
+        <.button>
+          Edit
+        </.button>
+      </.link>
+    </:actions>
+  </.header>
+
+  <.list>
+    <:item title="Amount:"><%= @expense.amount %></:item>
+    <:item title="Category:"><%= @expense.category.name %></:item>
+    <:item title="Description:"><%= @expense.description || "No Description Provided" %></:item>
+    <:item title="Date:"><%= @expense.add_date %></:item>
+  </.list>
+
+  <.back navigate={~p"/expenses"}>
+    Go Back
+  </.back>
+
+  <.modal
+    :if={@live_action == :edit}
+    show
+    on_cancel={JS.patch(~p"/expenses/#{@expense}/show")}
+    id="show-expense"
+  >
+    <.live_component
+      module={FormComponent}
+      expense={@expense}
+      user={@current_user}
+      page_id={@live_action}
+      patch={~p"/expenses/#{@expense}/show"}
+      id="edit-expense-modal"
+      title={@page_title}
+    />
+  </.modal>
+</div>
