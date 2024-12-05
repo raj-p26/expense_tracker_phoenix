@@ -80,7 +80,13 @@ defmodule ExpenseTrackerWeb.ExpensesLive.FormComponent do
     case Transactions.create_expense(expense_params) do
       {:ok, expense} ->
         notify_parent({:saved, expense.id})
-        {:noreply, put_flash(socket, :info, "Expense Created!")}
+
+        socket =
+          socket
+          |> put_flash(:info, "Expense Created!")
+          |> push_patch(to: ~p"/expenses")
+
+        {:noreply, socket}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :expense_form, to_form(changeset))}

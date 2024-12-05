@@ -233,4 +233,22 @@ defmodule ExpenseTracker.Transactions do
   def change_expense(%Expense{} = expense, attrs \\ %{}) do
     Expense.changeset(expense, attrs)
   end
+
+  def get_avg_income(user_id) do
+    Income
+    |> join(:inner, [i], c in Category, on: c.id == i.category_id)
+    |> where([i, c], i.user_id == ^user_id)
+    |> group_by([i, c], c.name)
+    |> select([i, c], {c.name, avg(i.amount)})
+    |> Repo.all()
+  end
+
+  def get_avg_expense(user_id) do
+    Expense
+    |> join(:inner, [e], c in Category, on: c.id == e.category_id)
+    |> where([e, c], e.user_id == ^user_id)
+    |> group_by([e, c], c.name)
+    |> select([e, c], {c.name, avg(e.amount)})
+    |> Repo.all()
+  end
 end

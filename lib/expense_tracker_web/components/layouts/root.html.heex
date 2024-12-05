@@ -16,14 +16,14 @@
       <div class="flex justify-between items-center relative container">
         <div class="text-xl font-bold cursor-default">ExpenseTracker</div>
         <.button
-          class="md:hidden p-1 border rounded text-xl"
+          class="lg:hidden p-1 border rounded text-xl"
           phx-click={JS.toggle_class("hidden", to: "#navbar-items")}
         >
           <.icon name="hero-bars-3" />
         </.button>
         <ul
           id="navbar-items"
-          class="gap-4 md:flex md:relative md:m-0 md:w-auto md:p-0 md:shadow-none absolute mt-14 dark:bg-brand bg-slate-950 w-full top-0 left-0 p-2 shadow-lg hidden"
+          class="gap-4 lg:flex lg:relative lg:m-0 lg:w-auto lg:p-0 lg:shadow-none absolute mt-14 dark:bg-brand bg-slate-950 w-full top-0 left-0 p-2 shadow-lg hidden"
         >
           <%= if @current_user do %>
             <li class="text-white p-2 dark:bg-sky-500 dark:hover:bg-sky-400 bg-slate-950 hover:bg-slate-800 dark:hover:shadow rounded transition">
@@ -35,6 +35,14 @@
                 class="text-white block p-2 dark:bg-sky-500 dark:hover:bg-sky-400 bg-slate-950 hover:bg-slate-800 dark:hover:shadow rounded transition"
               >
                 Settings
+              </.link>
+            </li>
+            <li>
+              <.link
+                patch={~p"/dashboard"}
+                class="text-white block p-2 dark:bg-sky-500 dark:hover:bg-sky-400 bg-slate-950 hover:bg-slate-800 dark:hover:shadow rounded transition"
+              >
+                Dashboard
               </.link>
             </li>
             <li>

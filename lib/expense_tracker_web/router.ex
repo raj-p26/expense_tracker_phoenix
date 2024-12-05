@@ -70,6 +70,8 @@ defmodule ExpenseTrackerWeb.Router do
     live "/categories", CategoriesLive.Index, :index
     live "/categories/new", CategoriesLive.Index, :new
 
+    live "/dashboard", DashboardLive
+
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
