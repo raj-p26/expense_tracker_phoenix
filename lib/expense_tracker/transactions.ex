@@ -247,7 +247,7 @@ defmodule ExpenseTracker.Transactions do
     Expense
     |> join(:inner, [e], c in Category, on: c.id == e.category_id)
     |> where([e, c], e.user_id == ^user_id)
-    |> group_by([e, c], c.name)
+    |> group_by([e, c], e.category_id)
     |> select([e, c], {c.name, avg(e.amount)})
     |> Repo.all()
   end

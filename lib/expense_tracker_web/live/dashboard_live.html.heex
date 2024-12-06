@@ -2,9 +2,13 @@
   <%= if @incomes_chart do %>
     <h1 class="text-2xl font-semibold">Your Income Usage:</h1>
     <%= @incomes_chart %>
+  <% else %>
+    <h1 class="text-2xl font-semibold">No data of incomes exists yet</h1>
   <% end %>
   <%= if @expenses_chart do %>
     <h1 class="text-2xl font-semibold">Your Expense Usage:</h1>
     <%= @expenses_chart %>
+  <% else %>
+    <h1 class="text-2xl font-semibold">No data of expenses exists yet</h1>
   <% end %>
 </div>
